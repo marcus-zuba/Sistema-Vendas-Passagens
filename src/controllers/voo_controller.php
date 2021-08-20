@@ -79,7 +79,7 @@ if (isset($_POST['inserir'])){
   $_SESSION['message'] = "Voo inserido!";
   $_SESSION['msg_type'] = "success";
 
-//  header("location: ../voo.php");
+  header("location: ../voo.php");
   exit();
 }
 
@@ -186,8 +186,8 @@ if (isset($_POST['atualizar'])){
   $_SESSION['message'] = "Voo atualizado!";
   $_SESSION['msg_type'] = "warning";
 
-//  header("location: ../voo.php");
-//  exit();
+  header("location: ../voo.php");
+  exit();
 }
 
 ?>
