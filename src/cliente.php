@@ -33,20 +33,6 @@
           trigger_error("Não pôde conectar com o banco de dados: ". $m["message"], E_USER_ERROR);
       }
 
-      // Modificar o formato da DATA
-      $s = oci_parse($c, "ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY'");
-      if (!$s) {
-        $m = oci_error($c);
-        trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
-      }
-
-      $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
-      if (!$r) {
-        $m = oci_error($r);
-        trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
-      }
-
-
       // Fazer o select
       $s = oci_parse($c, "SELECT * from CLIENTE");
       if (!$s) {
@@ -105,7 +91,7 @@
         <label>CPF</label>
         <?php if($update == true): ?>
           <input type="text" name="cpf" maxlength="11" class="form-control"
-          value="<?php echo $cpf; ?>" placeholder="Insira o CPF" disabled>
+          value="<?php echo $cpf; ?>" placeholder="Insira o CPF" readonly="readonly">
         <?php else: ?>
           <input type="text" name="cpf" maxlength="11" class="form-control"
           value="<?php echo $cpf; ?>" placeholder="Insira o CPF">

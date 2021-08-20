@@ -87,7 +87,7 @@
         <label>ID</label>
         <?php if($update == true): ?>
           <input type="number" name="id" class="form-control"
-          value="<?php echo $id; ?>" placeholder="Insira o ID" disabled>
+          value="<?php echo $id; ?>" placeholder="Insira o ID" readonly="readonly">
         <?php else: ?>
           <input type="number" name="id" class="form-control"
           value="<?php echo $id; ?>" placeholder="Insira o ID">

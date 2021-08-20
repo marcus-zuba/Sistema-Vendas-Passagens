@@ -91,7 +91,7 @@
         <label>COD</label>
         <?php if($update == true): ?>
           <input type="text" name="cod" maxlength="3" class="form-control"
-          value="<?php echo $cod; ?>" placeholder="Insira o Código" disabled>
+          value="<?php echo $cod; ?>" placeholder="Insira o Código" readonly="readonly">
         <?php else: ?>
           <input type="text" name="cod" maxlength="3" class="form-control"
           value="<?php echo $cod; ?>" placeholder="Insira o Código">

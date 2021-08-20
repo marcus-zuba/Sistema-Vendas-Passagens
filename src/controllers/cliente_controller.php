@@ -10,6 +10,22 @@ if (!$c) {
     trigger_error("Não pôde conectar com o banco de dados: ". $m["message"], E_USER_ERROR);
 }
 
+// Modificar o formato da DATA
+$s = oci_parse($c, "ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY'");
+if (!$s) {
+  $m = oci_error($c);
+  trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
+}
+
+$r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
+if (!$r) {
+  $m = oci_error($s);
+  $_SESSION['message'] = "Erro! Mensagem de Erro: ".$m['message'];
+  $_SESSION['msg_type'] = "danger";
+  header("location: ../cliente.php");
+  exit();
+}
+
 session_start();
 
 $update = false;
@@ -28,22 +44,6 @@ if (isset($_POST['inserir'])){
   $email = $_POST['email'];
   $telefone = $_POST['telefone'];
   $endereco = $_POST['endereco'];
-
-  // Modificar o formato da DATA
-  $s = oci_parse($c, "ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY'");
-  if (!$s) {
-    $m = oci_error($c);
-    trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
-  }
-
-  $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
-  if (!$r) {
-    $m = oci_error($s);
-    $_SESSION['message'] = "Erro na inserção! Mensagem de Erro: ".$m['message'];
-    $_SESSION['msg_type'] = "danger";
-    header("location: ../cliente.php");
-    exit();
-  }
 
   //Inserir os dados
   $s = oci_parse($c, "INSERT INTO CLIENTE VALUES ('$cpf', '$nome', '$data_nascimento', '$email', '$telefone', '$endereco')");
@@ -98,22 +98,6 @@ if (isset($_GET['deletar'])){
 }
 
 if (isset($_GET['editar'])){
-
-  // Modificar o formato da DATA
-  $s = oci_parse($c, "ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD'");
-  if (!$s) {
-    $m = oci_error($c);
-    trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
-  }
-
-  $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
-  if (!$r) {
-    $m = oci_error($s);
-    $_SESSION['message'] = "Erro! Mensagem de Erro: ".$m['message'];
-    $_SESSION['msg_type'] = "danger";
-    header("location: ../cliente.php");
-    exit();
-  }
   
   $cpf = $_GET['editar'];
 
@@ -137,7 +121,7 @@ if (isset($_GET['editar'])){
     $update = true;
     $cpf = $row['CPF'];
     $nome = $row['NOME'];
-    $data_nascimento = $row['DATA_NASCIMENTO'];
+    $data_nascimento = date("Y-m-d", strtotime($row['DATA_NASCIMENTO']));
     $email = $row['EMAIL'];
     $telefone = $row['TELEFONE'];
     $endereco = $row['ENDERECO'];
@@ -152,22 +136,6 @@ if (isset($_POST['atualizar'])){
   $email = $_POST['email'];
   $telefone = $_POST['telefone'];
   $endereco = $_POST['endereco'];
-
-  // Modificar o formato da DATA
-  $s = oci_parse($c, "ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MM-YYYY'");
-  if (!$s) {
-    $m = oci_error($c);
-    trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
-  }
-
-  $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
-  if (!$r) {
-    $m = oci_error($s);
-    $_SESSION['message'] = "Erro na atualização! Mensagem de Erro: ".$m['message'];
-    $_SESSION['msg_type'] = "danger";
-    header("location: ../cliente.php");
-    exit();
-  }
 
   //Inserir os dados
   $s = oci_parse($c, "UPDATE CLIENTE SET nome='$nome', data_nascimento='$data_nascimento', 
