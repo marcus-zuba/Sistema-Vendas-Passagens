@@ -89,8 +89,13 @@
       <form action="controllers/aeroporto_controller.php" method="POST">
       <div class="form-group">
         <label>COD</label>
-        <input type="text" name="cod" maxlength="3" class="form-control"
-         value="<?php echo $cod; ?>" placeholder="Insira o Código">
+        <?php if($update == true): ?>
+          <input type="text" name="cod" maxlength="3" class="form-control"
+          value="<?php echo $cod; ?>" placeholder="Insira o Código" disabled>
+        <?php else: ?>
+          <input type="text" name="cod" maxlength="3" class="form-control"
+          value="<?php echo $cod; ?>" placeholder="Insira o Código">
+        <?php endif ?>
       </div>
       <div class="form-group">
         <label>Nome</label>

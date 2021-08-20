@@ -103,8 +103,13 @@
       <form action="controllers/cliente_controller.php" method="POST">
       <div class="form-group">
         <label>CPF</label>
-        <input type="text" name="cpf" maxlength="11" class="form-control"
-         value="<?php echo $cpf; ?>" placeholder="Insira o CPF">
+        <?php if($update == true): ?>
+          <input type="text" name="cpf" maxlength="11" class="form-control"
+          value="<?php echo $cpf; ?>" placeholder="Insira o CPF" disabled>
+        <?php else: ?>
+          <input type="text" name="cpf" maxlength="11" class="form-control"
+          value="<?php echo $cpf; ?>" placeholder="Insira o CPF">
+        <?php endif ?>
       </div>
       <div class="form-group">
         <label>Nome</label>

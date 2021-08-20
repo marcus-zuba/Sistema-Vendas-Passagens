@@ -38,8 +38,11 @@ if (isset($_POST['inserir'])){
 
   $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro na inserção! Mensagem de erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../aeroporto.php");
+    exit();
   }
 
   oci_commit($c);
@@ -62,8 +65,11 @@ if (isset($_GET['deletar'])){
 
   $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro na deleção! Mensagem de erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../aeroporto.php");
+    exit();
   }
 
   oci_commit($c);
@@ -87,8 +93,11 @@ if (isset($_GET['editar'])){
 
   $r = oci_execute($s); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro! Mensagem de erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../aeroporto.php");
+    exit();
   }
 
   $row = oci_fetch_array($s, OCI_ASSOC+OCI_RETURN_NULLS);
@@ -115,7 +124,8 @@ if (isset($_POST['atualizar'])){
   $numero = $_POST['numero'];
 
   //Inserir os dados
-  $s = oci_parse($c, "UPDATE AEROPORTO SET cod='$cod', nome='$nome', cep='$cep', uf='$uf', cidade='$cidade', rua='$rua', numero='$numero' where cod='$cod'");
+  $s = oci_parse($c, "UPDATE AEROPORTO SET nome='$nome', cep='$cep', uf='$uf', 
+        cidade='$cidade', rua='$rua', numero='$numero' where cod='$cod'");
   if (!$s) {
       $m = oci_error($c);
       trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
@@ -123,8 +133,11 @@ if (isset($_POST['atualizar'])){
 
   $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro na atualização! Mensagem de erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../aeroporto.php");
+    exit();
   }
 
   oci_commit($c);

@@ -24,14 +24,18 @@ if (isset($_POST['inserir'])){
   //Inserir os dados
   $s = oci_parse($c, "INSERT INTO companhia_aerea VALUES ('$id', '$nome', '$sigla')");
   if (!$s) {
-      $m = oci_error($c);
-      trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($c);
+    trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
   }
+
 
   $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro na inserção!\nMensagem de Erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../companhia_aerea.php");
+    exit();
   }
 
   oci_commit($c);
@@ -54,14 +58,17 @@ if (isset($_GET['deletar'])){
 
   $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro na deleção! Mensagem de Erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../companhia_aerea.php");
+    exit();
   }
 
   oci_commit($c);
 
   $_SESSION['message'] = "Companhia aérea deletada!";
-  $_SESSION['msg_type'] = "danger";
+  $_SESSION['msg_type'] = "warning";
 
   header("location: ../companhia_aerea.php");
   exit();
@@ -77,10 +84,14 @@ if (isset($_GET['editar'])){
     trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
   }
 
+
   $r = oci_execute($s); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro! Mensagem de Erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../companhia_aerea.php");
+    exit();
   }
 
   $row = oci_fetch_array($s, OCI_ASSOC+OCI_RETURN_NULLS);
@@ -98,17 +109,19 @@ if (isset($_POST['atualizar'])){
   $nome = $_POST['nome'];
   $sigla = $_POST['sigla'];
 
-  //Inserir os dados
-  $s = oci_parse($c, "UPDATE companhia_aerea SET id='$id', nome='$nome', sigla='$sigla' where id = $id");
+  $s = oci_parse($c, "UPDATE companhia_aerea SET nome='$nome', sigla='$sigla' where id = '$id'");
   if (!$s) {
-      $m = oci_error($c);
-      trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($c);
+    trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
   }
 
   $r = oci_execute($s, OCI_NO_AUTO_COMMIT); // for PHP <= 5.3.1 use OCI_DEFAULT instead
   if (!$r) {
-    $m = oci_error($r);
-    trigger_error("Não pôde executar a sentença: ". $m["message"], E_USER_ERROR);
+    $m = oci_error($s);
+    $_SESSION['message'] = "Erro na atualização! Mensagem de Erro: ".$m['message'];
+    $_SESSION['msg_type'] = "danger";
+    header("location: ../companhia_aerea.php");
+    exit();
   }
 
   oci_commit($c);

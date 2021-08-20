@@ -35,10 +35,6 @@
 
       // Fazer o select
       $s = oci_parse($c, "SELECT * from companhia_aerea");
-      if (!$s) {
-        $m = oci_error($c);
-        trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
-      }
     
       $r = oci_execute($s); // for PHP <= 5.3.1 use OCI_DEFAULT instead
       if (!$r) {
@@ -89,8 +85,13 @@
       <form action="controllers/companhia_aerea_controller.php" method="POST">
       <div class="form-group">
         <label>ID</label>
-        <input type="number" name="id" class="form-control"
-         value="<?php echo $id; ?>" placeholder="Insira o ID">
+        <?php if($update == true): ?>
+          <input type="number" name="id" class="form-control"
+          value="<?php echo $id; ?>" placeholder="Insira o ID" disabled>
+        <?php else: ?>
+          <input type="number" name="id" class="form-control"
+          value="<?php echo $id; ?>" placeholder="Insira o ID">
+        <?php endif ?>
       </div>
       <div class="form-group">
         <label>Nome</label>
