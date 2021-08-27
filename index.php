@@ -15,6 +15,12 @@
       <div class="form-group" id="titulo">
         <h1>Bem vindo ao SVP!</h1>
       </div>
+      <div class="form-group">
+        <a href="src/comprar_passagem.php" class="btn btn-primary menu-option" >Comprar passagem</a>
+      </div>
+      <div class="form-group">
+        <a href="src/cliente.php" class="btn btn-primary menu-option" >Clientes Cadastrados</a>
+      </div>
       <div class="form-group" >
         <a href="src/aeroporto.php"  class="btn btn-primary menu-option" >Aeroportos</a>
       </div>
@@ -25,16 +31,7 @@
         <a href="src/voo.php" class="btn btn-primary menu-option" >Voos</a>
       </div>
       <div class="form-group">
-        <a href="src/cliente.php" class="btn btn-primary menu-option" >Clientes</a>
-      </div>
-      <div class="form-group">
-        <a href="src/comprar_passagem.php" class="btn btn-primary menu-option" >Comprar passagem</a>
-      </div>
-      <div class="form-group">
-        <a href="src/passagem.php" class="btn btn-primary menu-option" >Passagens</a>
-      </div>
-      <div class="form-group">
-        <a href="src/transacao.php" class="btn btn-primary menu-option" >Transações</a>
+        <a href="src/passagem.php" class="btn btn-primary menu-option" >Passagens e Transações</a>
       </div>
     </div>
   </body>

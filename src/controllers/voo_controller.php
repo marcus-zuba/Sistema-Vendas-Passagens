@@ -148,7 +148,6 @@ if (isset($_GET['editar'])){
 }
 
 if (isset($_POST['atualizar'])){
-  print_r($_POST);
   $id = $_POST['id'];
   $id_companhia_aerea = $_POST['id_companhia_aerea'];
   $cod_aeroporto_origem = $_POST['cod_aeroporto_origem'];
