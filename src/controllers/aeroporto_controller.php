@@ -75,7 +75,7 @@ if (isset($_GET['deletar'])){
   oci_commit($c);
 
   $_SESSION['message'] = "Aeroporto deletado!";
-  $_SESSION['msg_type'] = "danger";
+  $_SESSION['msg_type'] = "warning";
 
   header("location: ../aeroporto.php");
   exit();
