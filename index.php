@@ -13,7 +13,7 @@
   <body>
     <div class="col justify-content-center">
       <div class="form-group" id="titulo">
-        <h1>Bem vindo ao SVP!</h1>
+        <h1>Banco de Dados de Navegação Aeronáutica Doméstica</h1>
       </div>
       <div class="form-group">
         <a href="src/comprar_passagem.php" class="btn btn-primary menu-option" >Comprar passagem</a>
@@ -32,6 +32,21 @@
       </div>
       <div class="form-group">
         <a href="src/passagem.php" class="btn btn-primary menu-option" >Passagens e Transações</a>
+      </div>
+      <div class="form-group" id="titulo">
+        <h2>Relatórios</h2>
+      </div>
+      <div class="form-group">
+        <a href="src/relatorios/pessoas_voo.php" class="btn btn-primary menu-option" >Nomes dos Passageiros por Voo</a>
+      </div>
+      <div class="form-group">
+        <a href="src/relatorios/aeroportos_destinos.php" class="btn btn-primary menu-option" >Relação de Todos os Aeroportos e Destinos</a>
+      </div>
+      <div class="form-group">
+        <a href="src/relatorios/media_peso_bag.php" class="btn btn-primary menu-option" >Média dos Pesos Máximos de Bagagem por Companhia Aérea</a>
+      </div>
+      <div class="form-group">
+        <a href="src/relatorios/preco_medio_cia_aerea.php" class="btn btn-primary menu-option" >Preço médio da Passagem por Companhia Aérea</a>
       </div>
     </div>
   </body>
