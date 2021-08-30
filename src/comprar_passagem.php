@@ -134,7 +134,7 @@
         <?php if($update == true): ?>
           <button type="submit" class="btn btn-info" name="atualizar">Atualizar</button>
         <?php else: ?>
-        <button type="submit" class="btn btn-primary" name="inserir">Inserir</button>
+        <button type="submit" class="btn btn-primary" name="inserir">Comprar Passagem</button>
         <?php endif; ?>
       </div>
 
