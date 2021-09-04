@@ -118,14 +118,14 @@
          value="<?php echo $cidade; ?>"placeholder="Insira a Cidade">
       </div>
       <div class="form-group">
+        <label>Bairro</label>
+        <input type="text" name="bairro" maxlength="50" class="form-control" 
+         value="<?php echo $bairro; ?>"placeholder="Insira o Bairro">
+      </div>
+      <div class="form-group">
         <label>Rua</label>
         <input type="text" name="rua" maxlength="50" class="form-control" 
          value="<?php echo $rua; ?>"placeholder="Insira a Rua">
-      </div>
-      <div class="form-group">
-        <label>Número</label>
-        <input type="number" name="numero" class="form-control" 
-         value="<?php echo $numero; ?>"placeholder="Insira o Número">
       </div>
       <div class="form-group">
         <?php if($update == true): ?>

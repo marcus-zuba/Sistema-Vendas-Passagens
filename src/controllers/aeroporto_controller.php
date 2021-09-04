@@ -17,7 +17,7 @@ $cep = '';
 $uf = '';
 $cidade = '';
 $rua = '';
-$numero = '';
+$bairro = '';
 
 
 if (isset($_POST['inserir'])){
@@ -27,10 +27,10 @@ if (isset($_POST['inserir'])){
   $uf = $_POST['uf'];
   $cidade = $_POST['cidade'];
   $rua = $_POST['rua'];
-  $numero = $_POST['numero'];
+  $bairro = $_POST['bairro'];
 
   //Inserir os dados
-  $s = oci_parse($c, "INSERT INTO AEROPORTO VALUES ('$cod', '$nome', '$cep', '$uf', '$cidade', '$rua', '$numero')");
+  $s = oci_parse($c, "INSERT INTO AEROPORTO VALUES ('$cod', '$nome', '$cep', '$uf', '$cidade', '$bairro', '$rua' )");
   if (!$s) {
       $m = oci_error($c);
       trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
@@ -109,7 +109,7 @@ if (isset($_GET['editar'])){
     $uf = $row['UF'];
     $cidade = $row['CIDADE'];
     $rua = $row['RUA'];
-    $numero = $row['NUMERO'];
+    $bairro = $row['BAIRRO'];
   }
 
 }
@@ -121,11 +121,11 @@ if (isset($_POST['atualizar'])){
   $uf = $_POST['uf'];
   $cidade = $_POST['cidade'];
   $rua = $_POST['rua'];
-  $numero = $_POST['numero'];
+  $bairro = $_POST['bairro'];
 
   //Inserir os dados
   $s = oci_parse($c, "UPDATE AEROPORTO SET nome='$nome', cep='$cep', uf='$uf', 
-        cidade='$cidade', rua='$rua', numero='$numero' where cod='$cod'");
+        cidade='$cidade', rua='$rua', bairro='$bairro' where cod='$cod'");
   if (!$s) {
       $m = oci_error($c);
       trigger_error("Não pôde compilar a sentença: ". $m["message"], E_USER_ERROR);
